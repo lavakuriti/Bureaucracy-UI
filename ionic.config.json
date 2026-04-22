@@ -1,0 +1,7 @@
+{
+  "name": "Bureaucracy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
