@@ -1,0 +1,89 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-title class="font-bold text-lg">Approvals</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Review & Approve</h1>
+        <p class="text-gray-500">Your agent needs your approval on these items</p>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <ion-list lines="none" class="bg-transparent">
+        <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+            <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%; height: 16px; margin-top: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 40%; height: 14px; margin-top: 4px;"></ion-skeleton-text>
+        </ion-item>
+        <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+            <ion-skeleton-text animated style="width: 55%; height: 20px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 75%; height: 16px; margin-top: 8px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 45%; height: 14px; margin-top: 4px;"></ion-skeleton-text>
+        </ion-item>
+    </ion-list>
+    }
+
+
+    <!-- Approvals List -->
+    @if (!isLoading()) {
+    <ion-list lines="none" class="bg-transparent">
+        @for (approval of approvals(); track approval) {
+        <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100 approval-item"
+            [class.approved]="approval.status === 'approved'" [class.rejected]="approval.status === 'rejected'">
+            <ion-icon slot="start" [name]="getStatusIcon(approval.status)" [color]="getStatusColor(approval.status)"
+                class="text-xl"></ion-icon>
+
+            <ion-label>
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="font-semibold text-gray-900">{{ approval.title }}</h3>
+                    <ion-chip [color]="getPriorityColor(approval.priority)" size="small" class="priority-chip">
+                        {{ approval.priority }}
+                    </ion-chip>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">{{ approval.description }}</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500">
+                    <ion-icon name="time-outline" class="text-sm"></ion-icon>
+                    <span>{{ approval.timestamp | date:'short' }}</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="capitalize">{{ approval.type }}</span>
+                </div>
+            </ion-label>
+
+            <!-- Action Buttons for Pending Items -->
+            @if (approval.status === 'pending') {
+            <div slot="end" class="action-buttons">
+                <ion-button fill="clear" size="small" color="primary" (click)="reviewApproval(approval)">
+                    <ion-icon name="eye-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" size="small" color="success" (click)="approveItem(approval)">
+                    <ion-icon name="thumbs-up-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" size="small" color="danger" (click)="rejectItem(approval)">
+                    <ion-icon name="thumbs-down-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+            </div>
+            }
+            <!-- Status Badge for Completed Items -->
+            @else {
+            <ion-badge slot="end" [color]="getStatusColor(approval.status)" class="status-badge">
+                {{ approval.status }}
+            </ion-badge>
+            }
+        </ion-item>
+        }
+    </ion-list>
+    }
+
+
+    <!-- Empty State -->
+    @if (approvals().length === 0) {
+    <div class="empty-state">
+        <ion-icon name="checkmark-circle-outline" color="success" class="text-6xl mb-4"></ion-icon>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">All Caught Up!</h3>
+        <p class="text-gray-500 text-center">No pending approvals at this time.</p>
+    </div>
+    }
+</ion-content>

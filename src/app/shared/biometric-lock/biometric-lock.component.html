@@ -1,0 +1,89 @@
+<ion-content class="biometric-content">
+  <div class="lock-container">
+    <!-- Lock Icon -->
+    <div class="lock-icon-container" [class.authenticated]="isAuthenticated">
+      @if (!isAuthenticated) {
+        <ion-icon
+          name="lock-closed-outline"
+          class="lock-icon"
+        ></ion-icon>
+      }
+      @if (isAuthenticated) {
+        <ion-icon
+          name="checkmark-circle-outline"
+          class="success-icon"
+          color="success"
+        ></ion-icon>
+      }
+    </div>
+
+    <!-- Title and Description -->
+    <div class="text-center mb-6">
+      <h1 class="auth-title">
+        {{ isAuthenticated ? 'Access Granted' : 'Secure Access Required' }}
+      </h1>
+      <p class="auth-description">
+        {{ isAuthenticated
+           ? 'Welcome to your encrypted vault'
+           : 'Use biometric authentication to access your secure documents' }}
+      </p>
+    </div>
+
+    <!-- Authentication Card -->
+    @if (!isAuthenticated) {
+      <ion-card class="auth-card">
+      <ion-card-content class="text-center">
+        <!-- Biometric Button -->
+        @if (!isAuthenticating) {
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="authenticate()"
+            class="biometric-btn"
+          >
+            <ion-icon name="finger-print-outline" slot="start"></ion-icon>
+            Authenticate
+          </ion-button>
+        }
+
+        <!-- Loading State -->
+        @if (isAuthenticating) {
+          <div class="loading-state">
+          <ion-spinner name="circular" color="primary"></ion-spinner>
+          <p class="loading-text">Verifying...</p>
+          </div>
+        }
+
+        <!-- Error Message -->
+        @if (errorMessage) {
+          <div class="error-message">
+          <ion-text color="danger">
+            <p>{{ errorMessage }}</p>
+          </ion-text>
+          </div>
+        }
+
+        <!-- Cancel Button -->
+        <ion-button
+          fill="clear"
+          color="medium"
+          (click)="cancel()"
+          class="cancel-btn"
+        >
+          Cancel
+        </ion-button>
+      </ion-card-content>
+      </ion-card>
+    }
+
+    <!-- Success State -->
+    @if (isAuthenticated) {
+      <div class="success-state">
+      <ion-text color="success">
+        <h2>Authentication Successful</h2>
+      </ion-text>
+      <p class="success-text">Accessing your secure vault...</p>
+      </div>
+    }
+  </div>
+</ion-content>

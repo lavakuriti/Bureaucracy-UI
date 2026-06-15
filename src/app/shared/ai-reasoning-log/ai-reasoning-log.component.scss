@@ -1,0 +1,255 @@
+/* Timeline Layout */
+.reasoning-timeline {
+  --background: transparent;
+  position: relative;
+  padding-left: 0;
+}
+
+.timeline-item {
+  --padding-start: 0;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --background: transparent;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+.timeline-item:last-child {
+  border-left: none;
+  margin-bottom: 0;
+}
+
+/* Timeline Connector */
+.timeline-connector {
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: -16px;
+  width: 2px;
+  background: #e5e7eb;
+}
+
+/* Timeline Icon */
+.timeline-icon {
+  position: absolute;
+  left: -12px;
+  top: 16px;
+  width: 24px;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e5e7eb;
+  z-index: 1;
+}
+
+.status-icon {
+  font-size: 14px;
+}
+
+.status-spinner {
+  --scale: 0.7;
+}
+
+/* Timeline Content */
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Step Header */
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.step-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Status Badge */
+.status-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Timestamp and Duration */
+.timestamp, .duration {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Step Description */
+.step-description {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+  white-space: pre-wrap;
+}
+
+.step-description.typing {
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 31, 63, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid #001f3f;
+}
+
+/* Typewriter Cursor */
+.cursor {
+  animation: blink 1s infinite;
+  color: #001f3f;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Technical Details Section */
+.technical-section {
+  margin-top: 12px;
+}
+
+.expand-btn {
+  --color: #6b7280;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.technical-details {
+  margin-top: 8px;
+  padding: 12px;
+  background: rgba(0, 31, 63, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 31, 63, 0.1);
+}
+
+.technical-text {
+  font-size: 12px;
+  color: #374151;
+}
+
+.technical-text pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Monaco', 'Courier New', monospace;
+  line-height: 1.4;
+}
+
+/* Status-specific styling */
+.active {
+  border-left-color: #001f3f;
+  background: rgba(0, 31, 63, 0.02);
+}
+
+.active .timeline-icon {
+  border-color: #001f3f;
+  background: #001f3f;
+}
+
+.active .timeline-icon ion-icon,
+.active .timeline-icon ion-spinner {
+  color: #ffffff;
+}
+
+.completed {
+  border-left-color: #2ecc71;
+}
+
+.completed .timeline-icon {
+  border-color: #2ecc71;
+  background: #2ecc71;
+}
+
+.completed .timeline-icon ion-icon {
+  color: #ffffff;
+}
+
+.error {
+  border-left-color: #e74c3c;
+}
+
+.error .timeline-icon {
+  border-color: #e74c3c;
+  background: #e74c3c;
+}
+
+.error .timeline-icon ion-icon {
+  color: #ffffff;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .timeline-item {
+    border-left-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .timeline-connector {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .timeline-icon {
+    background: rgba(18, 18, 18, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .step-title {
+    color: #ffffff;
+  }
+
+  .step-description {
+    color: #d1d5db;
+  }
+
+  .timestamp, .duration {
+    color: #9ca3af;
+  }
+
+  .step-description.typing {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: #2ecc71;
+  }
+
+  .technical-details {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .technical-text {
+    color: #e5e7eb;
+  }
+
+  .active {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}

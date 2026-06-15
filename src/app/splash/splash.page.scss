@@ -1,0 +1,66 @@
+.splash-bg {
+  --background: linear-gradient(135deg, #0a2342 0%, #14532d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.splash-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.shield-pulse {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 35, 66, 0.12);
+  box-shadow: 0 0 32px 0 rgba(20, 83, 45, 0.12);
+  animation: pulse 1.5s infinite;
+  ion-icon {
+    font-size: 80px;
+    color: #0a2342;
+    filter: drop-shadow(0 0 8px #14532d88);
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 #14532d44; }
+  70% { box-shadow: 0 0 0 24px #14532d00; }
+  100% { box-shadow: 0 0 0 0 #14532d44; }
+}
+
+.progress-bar {
+  width: 120px;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  .progress {
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, #0a2342 0%, #14532d 100%);
+    border-radius: 3px;
+    animation: progress-move 2s infinite alternate;
+  }
+}
+
+@keyframes progress-move {
+  0% { width: 20%; }
+  100% { width: 100%; }
+}
+
+.splash-label {
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.85;
+  letter-spacing: 0.01em;
+  text-align: center;
+  font-weight: 500;
+}

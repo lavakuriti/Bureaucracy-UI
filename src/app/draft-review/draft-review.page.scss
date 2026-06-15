@@ -1,0 +1,362 @@
+/* Grid Layout */
+.review-grid {
+  --ion-grid-padding: 16px;
+  --ion-grid-padding-lg: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pdf-column, .fields-column {
+  padding: 8px;
+}
+
+/* PDF Preview Card */
+.pdf-preview-card {
+  height: 100%;
+  min-height: 500px;
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.pdf-preview-container {
+  height: 400px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.pdf-preview-container.loading {
+  background: #f3f4f6;
+}
+
+.pdf-loading {
+  text-align: center;
+  color: #6b7280;
+}
+
+.loading-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pdf-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 6px;
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+
+.pdf-header {
+  border-bottom: 2px solid #001f3f;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.pdf-header h3 {
+  color: #001f3f;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 4px 0;
+}
+
+.pdf-header p {
+  color: #6b7280;
+  margin: 0;
+  font-style: italic;
+}
+
+.pdf-fields {
+  margin-bottom: 20px;
+}
+
+.pdf-field {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.pdf-field label {
+  font-weight: bold;
+  color: #374151;
+  min-width: 120px;
+  margin-right: 12px;
+}
+
+.pdf-field span {
+  flex: 1;
+  padding: 4px 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.ai-filled {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+  font-weight: 500;
+}
+
+.pdf-footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.highlight-green {
+  color: #2ecc71;
+  font-weight: 600;
+}
+
+/* Fields Card */
+.fields-card {
+  height: 100%;
+  min-height: 500px;
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.review-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 8px;
+  display: block;
+}
+
+.fields-list {
+  --background: transparent;
+  margin-bottom: 16px;
+}
+
+.field-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.field-item.corrected {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.field-item:hover {
+  border-color: #001f3f;
+  box-shadow: 0 2px 8px rgba(0, 31, 63, 0.1);
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.confidence-badge {
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+/* Field Display/Edit */
+.field-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.field-display:hover {
+  border-color: #001f3f;
+  background: rgba(0, 31, 63, 0.02);
+}
+
+.field-value {
+  flex: 1;
+  font-size: 16px;
+  color: #111827;
+  font-weight: 500;
+}
+
+.field-value.ai-value {
+  color: #2ecc71;
+}
+
+.edit-icon {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.field-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-input {
+  flex: 1;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 6px;
+}
+
+.save-btn {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  flex-shrink: 0;
+}
+
+/* Submit Section */
+.submit-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.submit-btn {
+  --border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+}
+
+/* Submission States */
+.submission-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 12px;
+}
+
+.submission-loading ion-spinner {
+  --color: #2ecc71;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.submission-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 12px;
+  text-align: center;
+  background: rgba(46, 204, 113, 0.05);
+  border-radius: 8px;
+}
+
+.success-icon {
+  font-size: 48px;
+}
+
+.success-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2ecc71;
+  margin: 0;
+}
+
+.redirect-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* AI Reasoning Card */
+.reasoning-card {
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 16px;
+}
+
+/* Flex Utilities */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .pdf-preview-card, .fields-card, .reasoning-card {
+    --background: rgba(18, 18, 18, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pdf-preview-container {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(31, 31, 31, 0.5);
+  }
+
+  .pdf-content {
+    background: rgba(18, 18, 18, 0.8);
+    color: #e5e7eb;
+  }
+
+  .pdf-header {
+    border-color: #2ecc71;
+  }
+
+  .pdf-field span {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e5e7eb;
+  }
+
+  .field-item {
+    --background: rgba(31, 31, 31, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .field-display {
+    background: rgba(31, 31, 31, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .field-value {
+    color: #ffffff;
+  }
+}

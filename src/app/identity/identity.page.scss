@@ -1,0 +1,191 @@
+/* Security Banner */
+.security-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f0f4ff;
+  border: 1px solid #e0e7ff;
+  border-radius: 12px;
+  border-left: 4px solid #001f3f;
+}
+
+.security-icon {
+  color: #001f3f;
+  font-size: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Form Items */
+.form-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-item::part(native) {
+  background: transparent;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+ion-input {
+  font-size: 16px;
+  color: #111827;
+}
+
+.read-only-input {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+ion-input[readonly] {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+/* Masked Fields */
+.masked-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.masked-input {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #001f3f;
+}
+
+.mask-toggle-btn {
+  --color: #2ecc71;
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+/* Scan ID Button */
+.scan-id-btn {
+  margin-top: 8px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-weight: 600;
+}
+
+/* Item Divider */
+ion-item-divider {
+  --background: transparent;
+  --padding-top: 24px;
+  --padding-bottom: 8px;
+}
+
+/* Utility Classes */
+.mb-3 {
+  margin-bottom: 12px;
+}
+
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.mb-8 {
+  margin-bottom: 32px;
+}
+
+.h-24 {
+  height: 96px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-lg {
+  font-size: 18px;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.15em;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+/* FAB Styles */
+ion-fab-button {
+  --border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 31, 63, 0.15);
+}
+
+ion-fab-button[color='success'] {
+  --background: #2ecc71;
+}
+
+/* List and Group */
+ion-list {
+  --background: transparent;
+}
+
+ion-item-group {
+  margin-bottom: 0;
+}

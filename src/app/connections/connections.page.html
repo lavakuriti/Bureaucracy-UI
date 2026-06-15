@@ -1,0 +1,128 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="font-bold text-lg">Connections & Permissions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Manage Your Data</h1>
+    <p class="text-gray-500 text-sm">Control what your agent can access</p>
+  </div>
+
+  <!-- CORE ACCESS SECTION -->
+  <ion-list lines="none" class="bg-transparent mb-6">
+    <!-- Core Access Divider -->
+    <ion-item-divider class="ion-padding-top ion-padding-bottom">
+      <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+        Core Access
+      </ion-label>
+    </ion-item-divider>
+
+    <!-- Gmail Integration -->
+    <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+      <ion-icon slot="start" name="mail-outline" color="primary" class="text-xl"></ion-icon>
+      <ion-label>
+        <h3 class="font-semibold text-gray-900">Scan Gmail for Deadlines</h3>
+        <p class="text-sm text-gray-500">The agent will find insurance and tax emails</p>
+      </ion-label>
+      <ion-toggle
+        slot="end"
+        [checked]="gmailEnabled"
+        (ionChange)="onGmailToggle($event)"
+        color="success"
+      ></ion-toggle>
+    </ion-item>
+
+    <!-- Outlook Integration -->
+    <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+      <ion-icon slot="start" name="desktop-outline" color="primary" class="text-xl"></ion-icon>
+      <ion-label>
+        <h3 class="font-semibold text-gray-900">Scan Outlook for Deadlines</h3>
+        <p class="text-sm text-gray-500">The agent will find insurance and tax emails</p>
+      </ion-label>
+      <ion-toggle
+        slot="end"
+        [checked]="outlookEnabled"
+        (ionChange)="onOutlookToggle($event)"
+        color="success"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <!-- PORTAL LOGINS SECTION -->
+  <ion-list lines="none" class="bg-transparent mb-6">
+    <!-- Portal Logins Divider -->
+    <ion-item-divider class="ion-padding-top ion-padding-bottom">
+      <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+        Portal Logins
+      </ion-label>
+    </ion-item-divider>
+
+    <!-- MyGov Portal -->
+    <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+      <ion-icon slot="start" name="log-in-outline" color="primary" class="text-xl"></ion-icon>
+      <ion-label>
+        <h3 class="font-semibold text-gray-900">Connect MyGov Account</h3>
+        <div class="flex items-center gap-2 mt-1">
+          <ion-icon name="checkmark-circle-outline" color="success" class="text-sm"></ion-icon>
+          <p class="text-sm text-gray-600">Connected as <span class="font-medium">user123</span></p>
+        </div>
+      </ion-label>
+    </ion-item>
+
+    <!-- MyGov Action Buttons -->
+    <div class="flex gap-2 mb-3 px-4">
+      <ion-button expand="block" size="small" color="primary" (click)="editMyGovLogin()" fill="outline">
+        Edit Login
+      </ion-button>
+      <ion-button expand="block" size="small" color="danger" (click)="disconnectMyGov()" fill="outline">
+        Disconnect
+      </ion-button>
+    </div>
+
+    <!-- Car Insurance Portal -->
+    <ion-item class="mb-3 rounded-lg shadow-sm border border-gray-100">
+      <ion-icon slot="start" name="car-outline" color="primary" class="text-xl"></ion-icon>
+      <ion-label>
+        <h3 class="font-semibold text-gray-900">Progressive Insurance</h3>
+        <div class="flex items-center gap-2 mt-1">
+          <ion-icon name="alert-circle-outline" color="medium" class="text-sm"></ion-icon>
+          <p class="text-sm text-gray-600">Not Connected</p>
+        </div>
+      </ion-label>
+    </ion-item>
+
+    <!-- Car Insurance Action Button -->
+    <div class="flex gap-2 mb-3 px-4">
+      <ion-button expand="block" size="small" color="success" (click)="connectInsurance()" fill="solid">
+        Connect
+      </ion-button>
+    </div>
+  </ion-list>
+
+  <!-- PERMISSIONS AUDIT SECTION -->
+  <ion-list lines="none" class="bg-transparent mb-4">
+    <ion-item-divider class="ion-padding-top ion-padding-bottom">
+      <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+        Privacy & Security
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="bg-blue-50 rounded-lg border border-blue-200 mb-3">
+      <ion-label class="ion-padding">
+        <ion-note>
+          <p class="text-xs text-gray-700 leading-relaxed">
+            The agent only stores <span class="font-semibold">metadata</span> (due dates, providers) from your emails.
+            <span class="block mt-2">PDFs are stored <span class="font-semibold">end-to-end encrypted</span> in your Vault.</span>
+          </p>
+        </ion-note>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

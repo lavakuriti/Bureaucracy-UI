@@ -1,0 +1,83 @@
+.login-bg {
+  --background: linear-gradient(135deg, #0a2342 0%, #14532d 100%);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.login-header {
+  margin-top: 3.5rem;
+  text-align: center;
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+}
+
+.login-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 1.5rem;
+}
+
+.biometric-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a2342 60%, #14532d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px 0 #0a234244;
+  ion-icon {
+    font-size: 3.5rem;
+    color: #fff;
+  }
+}
+
+.passkey-btn {
+  width: 220px;
+  border-radius: 24px;
+  font-weight: 600;
+  color: #fff;
+  border: 1.5px solid #14532d;
+}
+
+.more-options-btn {
+  color: #b2dfdb;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  ion-button {
+    width: 220px;
+    border-radius: 24px;
+    font-weight: 600;
+    color: #222;
+    background: #fff;
+    ion-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.login-footer {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  small {
+    color: #b2dfdb;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+}

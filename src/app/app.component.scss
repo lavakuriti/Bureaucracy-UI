@@ -1,0 +1,80 @@
+/* Glassmorphism Tab Bar */
+.glassmorphism-tab-bar {
+  --background: rgba(255, 255, 255, 0.25);
+  --background-blur: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 31, 63, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 31, 63, 0.1);
+  position: relative;
+}
+
+.glassmorphism-tab-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 31, 63, 0.05) 0%, rgba(46, 204, 113, 0.02) 100%);
+  border-radius: 0;
+  pointer-events: none;
+}
+
+/* Tab Button Styling */
+ion-tab-button {
+  --color-selected: #001F3F;
+  --color: rgba(0, 31, 63, 0.6);
+  --background: transparent;
+  --background-focused: rgba(0, 31, 63, 0.05);
+  --background-hover: rgba(0, 31, 63, 0.05);
+  --border-radius: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+ion-tab-button ion-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+ion-tab-button ion-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Active Tab Styling */
+ion-tab-button.tab-selected {
+  --background: rgba(0, 31, 63, 0.1);
+  --color: #001F3F;
+  box-shadow: 0 2px 8px rgba(0, 31, 63, 0.15);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .glassmorphism-tab-bar {
+    --background: rgba(18, 18, 18, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .glassmorphism-tab-bar::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(46, 204, 113, 0.03) 100%);
+  }
+
+  ion-tab-button {
+    --color: rgba(255, 255, 255, 0.6);
+    --background-focused: rgba(255, 255, 255, 0.05);
+    --background-hover: rgba(255, 255, 255, 0.05);
+  }
+
+  ion-tab-button.tab-selected {
+    --background: rgba(255, 255, 255, 0.1);
+    --color: #ffffff;
+  }
+}

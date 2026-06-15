@@ -1,0 +1,172 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/approvals">
+                <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="font-bold text-lg">Draft Review</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="previewPdf()">
+                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid class="review-grid">
+        <ion-row>
+            <!-- PDF Preview Column -->
+            <ion-col size="12" size-lg="6" class="pdf-column">
+                <ion-card class="pdf-preview-card">
+                    <ion-card-header>
+                        <ion-card-title class="flex items-center gap-2">
+                            <ion-icon name="document-text-outline" color="primary"></ion-icon>
+                            Form Preview
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <!-- PDF Preview Placeholder -->
+                        <div class="pdf-preview-container" [class.loading]="isPdfLoading()">
+                            @if (isPdfLoading()) {
+                            <div class="pdf-loading">
+                                <ion-icon name="document-text-outline" class="loading-icon"></ion-icon>
+                                <p class="loading-text">Loading PDF...</p>
+                            </div>
+                            }
+                            @else {
+                            <div class="pdf-content">
+                                <!-- Simulated PDF content -->
+                                <div class="pdf-header">
+                                    <h3>IRS Form 1040</h3>
+                                    <p>U.S. Individual Income Tax Return</p>
+                                </div>
+                                <div class="pdf-fields">
+                                    <div class="pdf-field">
+                                        <label>Name:</label>
+                                        <span class="ai-filled">{{ formFields()[0].aiValue }}</span>
+                                    </div>
+                                    <div class="pdf-field">
+                                        <label>Address:</label>
+                                        <span class="ai-filled">{{ formFields()[1].aiValue }}</span>
+                                    </div>
+                                    <div class="pdf-field">
+                                        <label>SSN:</label>
+                                        <span class="ai-filled">{{ formFields()[2].aiValue }}</span>
+                                    </div>
+                                    <div class="pdf-field">
+                                        <label>DOB:</label>
+                                        <span class="ai-filled">{{ formFields()[3].aiValue }}</span>
+                                    </div>
+                                </div>
+                                <div class="pdf-footer">
+                                    <p>Fields marked in <span class="highlight-green">green</span> were auto-filled by
+                                        AI</p>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <!-- Form Fields Column -->
+            <ion-col size="12" size-lg="6" class="fields-column">
+                <ion-card class="fields-card">
+                    <ion-card-header>
+                        <ion-card-title class="flex items-center gap-2">
+                            <ion-icon name="create-outline" color="primary"></ion-icon>
+                            Review Fields
+                        </ion-card-title>
+                        <ion-note class="review-note">
+                            Click any field to edit. Green text shows AI-extracted values.
+                        </ion-note>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list lines="none" class="fields-list">
+                            @for (field of formFields(); track field) {
+                            <ion-item class="field-item" [class.corrected]="field.isCorrected">
+                                <ion-label position="stacked" class="field-label">
+                                    {{ field.label }}
+                                    <ion-badge [color]="getConfidenceColor(field.confidence)" size="small"
+                                        class="confidence-badge">
+                                        {{ getConfidenceText(field.confidence) }} confidence
+                                    </ion-badge>
+                                </ion-label>
+
+                                <!-- Display Mode -->
+                                @if (!field.isEditing) {
+                                <div class="field-display" (click)="toggleFieldEdit(field)">
+                                    <span class="field-value" [class.ai-value]="!field.isCorrected">
+                                        {{ field.userValue }}
+                                    </span>
+                                    <ion-icon name="create-outline" class="edit-icon" color="medium"></ion-icon>
+                                </div>
+                                }
+                                <!-- Edit Mode -->
+                                @else {
+                                <div class="field-edit">
+                                    <ion-input [(ngModel)]="field.userValue" type="text" placeholder="Enter value"
+                                        class="edit-input"></ion-input>
+                                    <ion-button fill="clear" size="small" color="success" (click)="saveFieldEdit(field)"
+                                        class="save-btn">
+                                        <ion-icon name="checkmark-circle-outline" slot="icon-only"></ion-icon>
+                                    </ion-button>
+                                </div>
+                                }
+                            </ion-item>
+                            }
+                        </ion-list>
+
+                        <!-- Submit Button -->
+                        <div class="submit-section">
+                            <!-- Loading State -->
+                            @if (isSubmitting()) {
+                            <div class="submission-loading">
+                                <ion-spinner name="circular" color="primary"></ion-spinner>
+                                <p class="loading-text">Submitting form...</p>
+                            </div>
+                            }
+                            <!-- Success State -->
+                            @else if (submissionSuccess()) {
+                            <div class="submission-success">
+                                <ion-icon name="checkmark-circle-outline" color="success"
+                                    class="success-icon"></ion-icon>
+                                <p class="success-text">Form submitted successfully!</p>
+                                <p class="redirect-text">Redirecting...</p>
+                            </div>
+                            }
+
+                            <!-- Normal Button State -->
+                            @else {
+                            <ion-button expand="block" color="success" (click)="submitForm()" class="submit-btn">
+                                <ion-icon name="send-outline" slot="start"></ion-icon>
+                                Submit Form
+                            </ion-button>
+                            }
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <!-- AI Reasoning Timeline -->
+        <ion-row>
+            <ion-col size="12">
+                <ion-card class="reasoning-card">
+                    <ion-card-header>
+                        <ion-card-title class="flex items-center gap-2">
+                            <ion-icon name="checkmark-circle-outline" color="primary"></ion-icon>
+                            AI Processing Log
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <app-ai-reasoning-log [steps]="reasoningSteps()"
+                            [isActive]="isAgentWorking()"></app-ai-reasoning-log>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

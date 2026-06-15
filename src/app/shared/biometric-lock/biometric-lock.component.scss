@@ -1,0 +1,196 @@
+/* Biometric Content */
+.biometric-content {
+  --background: linear-gradient(135deg, #001f3f 0%, #2ecc71 20%, #001f3f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.lock-container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Lock Icon */
+.lock-icon-container {
+  margin-bottom: 32px;
+  transition: all 0.5s ease;
+}
+
+.lock-icon {
+  font-size: 80px;
+  color: #ffffff;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.success-icon {
+  font-size: 80px;
+  filter: drop-shadow(0 4px 12px rgba(46, 204, 113, 0.4));
+}
+
+.authenticated .lock-icon-container {
+  animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Text Styles */
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.auth-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Authentication Card */
+.auth-card {
+  --background: rgba(255, 255, 255, 0.95);
+  --background-blur: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Biometric Button */
+.biometric-btn {
+  --border-radius: 12px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 31, 63, 0.3);
+}
+
+.biometric-btn ion-icon {
+  font-size: 24px;
+}
+
+/* Loading State */
+.loading-state {
+  padding: 24px 0;
+}
+
+.loading-text {
+  color: #001f3f;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+/* Error Message */
+.error-message {
+  margin: 16px 0;
+  padding: 12px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+.error-message p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  --color: #6b7280;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Success State */
+.success-state {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.success-state h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #001f3f;
+}
+
+.success-text {
+  color: #2ecc71;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Spacing Utilities */
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .biometric-content {
+    --background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 50%, #0f1419 100%);
+  }
+
+  .auth-title {
+    color: #ffffff;
+  }
+
+  .auth-description {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .auth-card {
+    --background: rgba(18, 18, 18, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .loading-text {
+    color: #ffffff;
+  }
+
+  .success-state {
+    --background: rgba(18, 18, 18, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .success-state h2 {
+    color: #ffffff;
+  }
+}

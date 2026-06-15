@@ -1,0 +1,32 @@
+<ion-content class="login-bg" fullscreen>
+  <div class="login-header">
+    <h1>Welcome back, {{ userName || 'Agentic Life Admin.' }}</h1>
+  </div>
+  <div class="login-center">
+    <button ion-button class="biometric-btn" (click)="biometricLogin()">
+      <ion-icon name="finger-print-outline"></ion-icon> <!--outline-->
+    </button>
+    <ion-button expand="block" fill="outline" class="passkey-btn" (click)="passkeyLogin()">
+      Use Passkey
+    </ion-button>
+    <ion-button expand="block" fill="clear" class="more-options-btn" (click)="showMoreOptions = !showMoreOptions">
+      More Options
+    </ion-button>
+    @if (showMoreOptions) {
+    <div class="social-login">
+      <ion-button expand="block" fill="solid" color="light" (click)="googleLogin()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Continue with Google
+      </ion-button>
+      <ion-button expand="block" fill="solid" color="light" (click)="microsoftLogin()">
+        <ion-icon slot="start" name="logo-microsoft"></ion-icon>
+        Continue with Microsoft
+      </ion-button>
+    </div>
+    }
+
+  </div>
+  <div class="login-footer">
+    <small>Your data is encrypted locally and never shared without your approval.</small>
+  </div>
+</ion-content>

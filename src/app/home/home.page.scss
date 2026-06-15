@@ -25,3 +25,26 @@
 #container a {
   text-decoration: none;
 }
+
+ion-content {
+  --background: #F8F9FA;
+}
+
+ion-card {
+  border-radius: 16px;
+  --box-shadow: 0 4px 12px rgba(0, 31, 63, 0.08);
+}
+
+ion-item {
+  --background: #ffffff;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --inner-padding-end: 8px;
+  
+  &::part(native) {
+    border-radius: 12px;
+  }
+}
+.absolute {
+  position: absolute;
+}

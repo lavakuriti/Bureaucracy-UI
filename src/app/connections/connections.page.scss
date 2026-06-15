@@ -1,0 +1,115 @@
+ion-item-divider {
+  --background: transparent;
+  --padding-top: 24px;
+  --padding-bottom: 8px;
+}
+
+ion-toggle {
+  --handle-width: 28px;
+  --handle-height: 28px;
+  --track-width: 48px;
+  --track-height: 28px;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --background: transparent;
+}
+
+.bg-blue-50 {
+  background-color: #f0f4ff;
+}
+
+.border-blue-200 {
+  border-color: #e0e7ff;
+}
+
+ion-note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.mt-1 {
+  margin-top: 4px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mb-3 {
+  margin-bottom: 12px;
+}
+
+.px-4 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.text-xl {
+  font-size: 20px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.tracking-widest {
+  letter-spacing: 0.15em;
+}
+
+.leading-relaxed {
+  line-height: 1.625;
+}
+
+.block {
+  display: block;
+}

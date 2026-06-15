@@ -1,0 +1,109 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="font-bold text-lg">Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- User Profile Card -->
+  <ion-card class="profile-card mb-6">
+    <ion-card-header class="text-center">
+      <ion-avatar class="avatar-large mb-3">
+        @if (userProfile.avatar) {
+          <img [src]="userProfile.avatar" alt="User Profile" />
+        } @else {
+          <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+        }
+      </ion-avatar>
+      <ion-card-title class="text-xl font-bold text-gray-900">
+        {{ userProfile.name }}
+      </ion-card-title>
+      <ion-card-content class="text-sm text-gray-600">
+        {{ userProfile.email }}
+      </ion-card-content>
+      <p class="text-xs text-gray-500 mt-2">
+        Member since {{ userProfile.memberSince }}
+      </p>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- Account Menu -->
+  <ion-list lines="none" class="bg-transparent">
+    <!-- Profile & Security -->
+    <ion-item-group>
+      <ion-item-divider class="ion-padding-top ion-padding-bottom">
+        <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+          Profile & Security
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item class="menu-item" button (click)="navigateToIdentity()">
+        <ion-icon slot="start" name="person-circle-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold">Identity & Profile</h3>
+          <p class="text-sm text-gray-500">Manage your personal information</p>
+        </ion-label>
+        <ion-icon slot="end" name="lock-closed-outline" color="success"></ion-icon>
+      </ion-item>
+
+      <ion-item class="menu-item" button (click)="navigateToConnections()">
+        <ion-icon slot="start" name="shield-checkmark-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold">Connections & Permissions</h3>
+          <p class="text-sm text-gray-500">Control data access</p>
+        </ion-label>
+        <ion-icon slot="end" name="key-outline" color="medium"></ion-icon>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- App Settings -->
+    <ion-item-group>
+      <ion-item-divider class="ion-padding-top ion-padding-bottom">
+        <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+          App Settings
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item class="menu-item" button (click)="navigateToSettings()">
+        <ion-icon slot="start" name="settings-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold">Settings</h3>
+          <p class="text-sm text-gray-500">App preferences and notifications</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="menu-item" button (click)="navigateToHelp()">
+        <ion-icon slot="start" name="help-circle-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold">Help & Support</h3>
+          <p class="text-sm text-gray-500">Get help and contact support</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item class="menu-item" button (click)="navigateToAbout()">
+        <ion-icon slot="start" name="information-circle-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold">About</h3>
+          <p class="text-sm text-gray-500">Version info and legal</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- Account Actions -->
+    <ion-item-group>
+      <ion-item-divider class="ion-padding-top ion-padding-bottom">
+        <ion-label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+          Account
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item class="menu-item danger-item" button (click)="logout()">
+        <ion-icon slot="start" name="log-out-outline" color="danger"></ion-icon>
+        <ion-label>
+          <h3 class="font-semibold text-red-600">Sign Out</h3>
+          <p class="text-sm text-gray-500">Securely sign out of your account</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

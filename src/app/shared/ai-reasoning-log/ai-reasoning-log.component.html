@@ -1,0 +1,61 @@
+<ion-list lines="none" class="reasoning-timeline">
+    @for (step of steps; let i = $index; track step.id) {
+    <ion-item class="timeline-item" [class.active]="step.status === 'active'"
+        [class.completed]="step.status === 'completed'" [class.error]="step.status === 'error'">
+        @if (i < steps.length - 1) { <div class="timeline-connector">
+            </div>
+            }
+
+            <div class="timeline-icon">
+                @if (step.status !== 'active') {
+                <ion-icon [name]="getStatusIcon(step)" [color]="getStatusColor(step)" class="status-icon"></ion-icon>
+                }
+                @if (step.status === 'active') {
+                <ion-spinner name="dots" color="primary" class="status-spinner"></ion-spinner>
+                }
+            </div>
+
+            <div class="timeline-content">
+                <div class="step-header">
+                    <h4 class="step-title">{{ step.title }}</h4>
+                    <div class="step-meta">
+                        <ion-badge [color]="getStatusColor(step)" size="small" class="status-badge">
+                            {{ step.status }}
+                        </ion-badge>
+                        <span class="timestamp">{{ step.timestamp | date:'shortTime' }}</span>
+                        @if (step.duration) {
+                        <span class="duration">
+                            ({{ formatDuration(step.duration) }})
+                        </span>
+                        }
+                    </div>
+                </div>
+
+                <p class="step-description" [class.typing]="step.status === 'active' && isActive">
+                    {{ getDisplayText(step) }}
+                    @if (step.status === 'active' && isActive) {
+                    <span class="cursor">|</span>
+                    }
+                </p>
+
+                @if (step.technicalDetails) {
+                <div class="technical-section">
+                    <ion-button fill="clear" size="small" (click)="toggleExpanded(step.id)" class="expand-btn">
+                        <ion-icon [name]="isExpanded(step.id) ? 'chevron-up-outline' : 'chevron-down-outline'"
+                            slot="start"></ion-icon>
+                        {{ isExpanded(step.id) ? 'Hide' : 'Show' }} Technical Details
+                    </ion-button>
+
+                    @if (isExpanded(step.id)) {
+                    <div class="technical-details">
+                        <ion-note class="technical-text">
+                            <pre>{{ step.technicalDetails }}</pre>
+                        </ion-note>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+    </ion-item>
+    }
+</ion-list>

@@ -1,0 +1,220 @@
+<!-- Biometric Lock Screen -->
+@if (showBiometricLock()) {
+  <app-biometric-lock
+    (authenticated)="onAuthenticationSuccess($event)"
+  ></app-biometric-lock>
+}
+
+<!-- Main Vault Content -->
+@if (!showBiometricLock()) {
+<div>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-title class="font-bold">Secure Vault</ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="shield-checkmark-outline" color="success"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-segment [value]="segment()" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="active">
+          <ion-label>Active</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="archived">
+          <ion-label>Archived</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <!-- Security Status -->
+    <div class="security-banner mb-4">
+      <ion-icon name="lock-closed-outline" class="security-icon"></ion-icon>
+      <div>
+        <p class="text-xs uppercase font-semibold text-gray-700 tracking-wider">
+          End-to-End Encrypted
+        </p>
+        <p class="text-sm text-gray-600">
+          AES-256 • Biometric Protected
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Filters -->
+    <div class="filters-container mb-6">
+      @for (category of categories; track category) {
+        <ion-chip
+          outline="true"
+          class="filter-chip"
+        >
+          <ion-label>{{ category }}</ion-label>
+        </ion-chip>
+      }
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="documents-grid">
+      <ion-row>
+        @for (i of [1,2,3,4,5,6]; track i) {
+        <ion-col size="6" size-md="4">
+          <ion-card class="document-card">
+            <div class="card-preview">
+              <ion-skeleton-text animated class="preview-skeleton"></ion-skeleton-text>
+            </div>
+            <ion-card-header>
+              <ion-skeleton-text animated style="width: 60%; height: 12px;"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 80%; height: 16px; margin-top: 8px;"></ion-skeleton-text>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+        }
+      </ion-row>
+    </div>
+    }
+
+    <!-- Document Gallery -->
+    @if (!isLoading()) {
+    <div>
+      <h2 class="section-title">Recent Documents</h2>
+      <ion-grid class="documents-grid">
+        <ion-row>
+          @for (doc of documents(); track doc) {
+          <ion-col size="6" size-md="4">
+            <ion-card class="document-card" (click)="openDocument(doc)">
+              <div class="card-preview">
+                <ion-icon [name]="doc.icon" class="preview-icon" color="primary"></ion-icon>
+                @if (doc.needsAction) {
+                  <ion-badge
+                    color="danger"
+                    class="action-badge"
+                  >
+                    Action
+                  </ion-badge>
+                }
+                @if (doc.encrypted) {
+                  <ion-icon
+                    name="lock-closed-outline"
+                    class="encryption-icon"
+                    color="success"
+                  ></ion-icon>
+                }
+              </div>
+              <ion-card-header class="card-header">
+                <ion-card-subtitle class="card-category">{{ doc.category }}</ion-card-subtitle>
+                <ion-card-title class="card-title">{{ doc.name }}</ion-card-title>
+                <div class="card-meta">
+                  <span class="file-size">{{ doc.details['Size'] }}</span>
+                </div>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </div>
+    }
+
+    <!-- Floating Action Button -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+
+  <!-- Document Review Modal -->
+  <ion-modal [isOpen]="isModalOpen()" (didDismiss)="closeModal()" [initialBreakpoint]="0.9" [breakpoints]="[0, 0.9]">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ selectedDoc()?.name }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="modal-content">
+          <!-- PDF Preview with @defer -->
+          <div class="pdf-section">
+            @defer (on viewport) {
+              <div class="pdf-viewer">
+                <div class="pdf-header">
+                  <h3>Document Preview</h3>
+                  <p>Secure PDF Viewer</p>
+                </div>
+                <div class="pdf-content-placeholder">
+                  <ion-icon name="document-text-outline" class="pdf-icon"></ion-icon>
+                  <p>PDF content would load here</p>
+                  <p class="text-sm text-gray-500">Deferred loading for performance</p>
+                </div>
+              </div>
+            } @placeholder {
+              <div class="pdf-placeholder">
+                <ion-icon name="document-text-outline" class="placeholder-icon"></ion-icon>
+                <p>Tap to load PDF preview</p>
+              </div>
+            }
+          </div>
+
+          <!-- Document Details -->
+          <div class="details-section">
+            <h3 class="details-title">Document Details</h3>
+            <div class="details-card">
+              <ion-list lines="full" class="details-list">
+                <ion-item class="status-item">
+                  <ion-label>
+                    <p class="detail-label">Status</p>
+                    <h3 class="detail-value">
+                      <ion-icon name="shield-checkmark-outline" color="success"></ion-icon>
+                      Verified & Encrypted
+                    </h3>
+                  </ion-label>
+                </ion-item>
+                @for (entry of (selectedDoc()?.details | keyvalue); track entry) {
+                <ion-item class="detail-item">
+                  <ion-label>
+                    <p class="detail-label">{{ entry.key }}</p>
+                    <h3 class="detail-value">{{ entry.value }}</h3>
+                  </ion-label>
+                </ion-item>
+                }
+              </ion-list>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <ion-button
+                expand="block"
+                color="primary"
+                fill="outline"
+                (click)="viewDocument(selectedDoc())"
+                class="action-btn"
+              >
+                <ion-icon name="eye-outline" slot="start"></ion-icon>
+                View Document
+              </ion-button>
+              <ion-button
+                expand="block"
+                color="success"
+                (click)="downloadDocument(selectedDoc())"
+                class="action-btn"
+              >
+                <ion-icon name="download-outline" slot="start"></ion-icon>
+                Download Securely
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  </div>
+}
